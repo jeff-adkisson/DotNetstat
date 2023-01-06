@@ -4,6 +4,14 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <Title>DotNetstat</Title>
+        <Authors>Jeff Adkisson</Authors>
+        <Company>Supermassive Robot, LLC.</Company>
+        <Description>Simplifies matching process ID to port across platforms</Description>
+        <PackageProjectUrl>https://github.com/jeff-adkisson/DotNetstat</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/jeff-adkisson/DotNetstat</RepositoryUrl>
+        <Version>1.0.0</Version>
+        <PackageDescription>Simplifies matching process ID to port across platforms</PackageDescription>
     </PropertyGroup>
 
 </Project>
