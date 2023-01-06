@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetstat", "DotNetstat\DotNetstat.csproj", "{79B82B3C-11CA-47BF-9C3F-D974BCEF7183}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetstat.Tests", "DotNetstat.Tests\DotNetstat.Tests.csproj", "{75907A59-FD0A-4645-85CA-6843B3A52274}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{79B82B3C-11CA-47BF-9C3F-D974BCEF7183}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79B82B3C-11CA-47BF-9C3F-D974BCEF7183}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79B82B3C-11CA-47BF-9C3F-D974BCEF7183}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75907A59-FD0A-4645-85CA-6843B3A52274}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75907A59-FD0A-4645-85CA-6843B3A52274}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75907A59-FD0A-4645-85CA-6843B3A52274}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75907A59-FD0A-4645-85CA-6843B3A52274}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

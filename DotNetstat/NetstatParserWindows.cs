@@ -13,10 +13,10 @@ internal partial class NetstatParserWindows : INetstatParser
         for (var index = 0; index < lines.Length; index++)
         {
             var line = lines[index];
-            
-            if (!string.IsNullOrWhiteSpace(line) && line.Trim().ToLower().StartsWith("proto")) 
+
+            if (!string.IsNullOrWhiteSpace(line) && line.Trim().ToLower().StartsWith("proto"))
                 continue;
-            
+
             var record = ParseLine(line);
             if (record != null) records.Add(record);
         }
@@ -26,10 +26,8 @@ internal partial class NetstatParserWindows : INetstatParser
 
     private static NetstatLine? ParseLine(string line)
     {
-        // Use a regular expression to parse the line
         var match = ExtractNetstatRecordRegex().Match(line);
         if (match.Success)
-        {
             return new NetstatLine
             {
                 Protocol = match.Groups["proto"].Value,
@@ -38,7 +36,6 @@ internal partial class NetstatParserWindows : INetstatParser
                 State = match.Groups["state"].Value,
                 ProcessId = int.Parse(match.Groups["pid"].Value)
             };
-        }
         return null;
     }
 

@@ -1,8 +1,8 @@
 namespace DotNetstat.Tests;
 
-public sealed class RunOnWindowsFact : FactAttribute
+public sealed class RunOnWindowsFactAttribute : FactAttribute
 {
-    public RunOnWindowsFact()
+    public RunOnWindowsFactAttribute()
     {
         if (PlatformAutoSelector.Select() != Platform.Windows)
         {

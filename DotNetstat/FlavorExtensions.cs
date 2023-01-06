@@ -2,14 +2,17 @@ using System.ComponentModel;
 
 namespace DotNetstat;
 
-public static class NetstatFlavorExtensions
+internal static class NetstatFlavorExtensions
 {
-    public static string GetCommand(this NetstatFlavor val)
+    public static Command Command(this Flavor flavor)
     {
-        var attributes = (DescriptionAttribute[])val
-            .GetType()
-            .GetField(val.ToString())!
-            .GetCustomAttributes(typeof(DescriptionAttribute), false);
-        return attributes.Length > 0 ? attributes[0].Description : string.Empty;
+        var cmdAttr = flavor.GetAttributeOfType<CommandAttribute>();
+        return new Command(cmdAttr.Command, cmdAttr.Arguments);
+    }
+
+    public static Platform RelatedPlatform(this Flavor flavor)
+    {
+        var relatedAttr = flavor.GetAttributeOfType<RelatedPlatformAttribute>();
+        return relatedAttr.Platform;
     }
 }

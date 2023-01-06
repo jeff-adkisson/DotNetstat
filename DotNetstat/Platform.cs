@@ -2,7 +2,8 @@ namespace DotNetstat;
 
 public enum Platform
 {
+    Automatic,
     Windows,
     Linux,
-    MacOs
+    Osx
 }

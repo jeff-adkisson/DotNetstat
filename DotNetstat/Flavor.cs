@@ -2,20 +2,25 @@
 
 namespace DotNetstat;
 
-public enum NetstatFlavor
+public enum Flavor
 {
-    [Description("netstat -n -a -o")]
+    [RelatedPlatform(Platform.Automatic)] 
+    [Command("netstat","-n -a -o")]
     Automatic,
-    
-    [Description("netstat -n -a -o")]
+
+    [RelatedPlatform(Platform.Windows)] 
+    [Command("netstat", "-n -a -o")]
     WindowsNetstatNao,
-    
-    [Description("ss -ltnup")]
+
+    [RelatedPlatform(Platform.Linux)] 
+    [Command("ss", "-ltnup")]
     LinuxSsLtnup,
-    
-    [Description("netstat -nlp")]
+
+    [RelatedPlatform(Platform.Linux)] 
+    [Command("netstat", "-nlp")]
     LinuxNetstatNlp,
-    
-    [Description("netstat -n -a -o")]
+
+    [RelatedPlatform(Platform.Linux)] 
+    [Command("netstat","-n -a -o")]
     LinuxNetstatNao
 }

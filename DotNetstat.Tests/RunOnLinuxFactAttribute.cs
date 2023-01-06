@@ -1,8 +1,8 @@
 namespace DotNetstat.Tests;
 
-public sealed class RunOnLinux : FactAttribute
+public sealed class RunOnLinuxFact : FactAttribute
 {
-    public RunOnLinux()
+    public RunOnLinuxFact()
     {
         if (PlatformAutoSelector.Select() != Platform.Linux)
         {

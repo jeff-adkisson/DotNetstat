@@ -1,8 +1,8 @@
 namespace DotNetstat.Tests;
 
-public sealed class RunOnOsx : FactAttribute
+public sealed class RunOnOsxFactAttribute : FactAttribute
 {
-    public RunOnOsx()
+    public RunOnOsxFactAttribute()
     {
         if (PlatformAutoSelector.Select() != Platform.Osx)
         {

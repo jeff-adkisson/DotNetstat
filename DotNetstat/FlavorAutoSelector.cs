@@ -2,19 +2,16 @@ namespace DotNetstat;
 
 public static class FlavorAutoSelector
 {
-    public static string Select(this Flavor flavor)
+    public static Command Command(this Platform platform)
     {
-        if (flavor != Flavor.Automatic) return flavor.GetCommand();
-        
-        var platform = PlatformAutoSelector.Select();
-        switch (platform)
+        if (platform == Platform.Automatic)
+            return Flavor.Automatic.Command();
+
+        return platform switch
         {
-            case Platform.Windows:
-                return Flavor.WindowsNetstatNao.GetCommand();
-            case Platform.Linux:
-                return Flavor.LinuxNetstatNao.GetCommand();
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+            Platform.Windows => Flavor.WindowsNetstatNao.Command(),
+            Platform.Linux => Flavor.LinuxNetstatNao.Command(),
+            _ => throw new ArgumentOutOfRangeException()
+        };
     }
 }
