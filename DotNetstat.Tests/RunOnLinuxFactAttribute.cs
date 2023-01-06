@@ -4,9 +4,6 @@ public sealed class RunOnLinuxFact : FactAttribute
 {
     public RunOnLinuxFact()
     {
-        if (PlatformAutoSelector.Select() != Platform.Linux)
-        {
-            Skip = "Ignore on non-Linux platforms";
-        }
+        if (PlatformAutoSelector.Select() != Platform.Linux) Skip = "Ignore on non-Linux platforms";
     }
 }

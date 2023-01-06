@@ -5,7 +5,7 @@ public class Command
     public Command(string commandToParse)
     {
         var components = commandToParse.Split(' ');
-        if (components.Length < 2) 
+        if (components.Length < 2)
             throw new ArgumentException($"Invalid command: {commandToParse}");
 
         Name = components[0];

@@ -1,19 +1,18 @@
 namespace DotNetstat.Tests;
 
-
 public class LinuxTests
 {
     [RunOnLinuxFact]
     public void TestPlatform()
     {
-        var results = NetStat.Call(Platform.Linux);
+        var results = Netstat.Call(Platform.Linux);
         Assert.True(results.Any(), "Expected at least on result");
     }
 
     [RunOnLinuxFact]
     public void TestFlavor()
     {
-        var results = NetStat.Call(Flavor.LinuxNetstatNao);
+        var results = Netstat.Call(Flavor.LinuxNetstatNao);
         Assert.True(results.Any(), "Expected at least on result");
     }
 }

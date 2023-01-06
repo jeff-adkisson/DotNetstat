@@ -1,5 +1,3 @@
-using System.ComponentModel;
-
 namespace DotNetstat;
 
 internal static class NetstatFlavorExtensions

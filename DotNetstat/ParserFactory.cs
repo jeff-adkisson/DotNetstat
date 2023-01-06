@@ -2,9 +2,11 @@ namespace DotNetstat;
 
 internal static class ParserFactory
 {
-    private static INetstatParser? _windowsParserInst;
+    private static INetstatParser? _windowsParserNoProcessDetailsInst;
 
-    public static INetstatParser GetParser(Platform platform)
+    private static INetstatParser? _windowsParserWithProcessDetailsInst;
+
+    public static INetstatParser GetParser(Platform platform, bool includeProcessDetails = true)
     {
         while (true)
             switch (platform)
@@ -15,7 +17,12 @@ internal static class ParserFactory
                     continue;
 
                 case Platform.Windows:
-                    return _windowsParserInst = _windowsParserInst ?? new NetstatParserWindows();
+                    if (includeProcessDetails)
+                        return _windowsParserWithProcessDetailsInst 
+                            ??= new NetstatParserWindows(true);
+                    
+                    return _windowsParserNoProcessDetailsInst 
+                        ??= new NetstatParserWindows(false);
 
                 case Platform.Linux:
                 case Platform.Osx:
