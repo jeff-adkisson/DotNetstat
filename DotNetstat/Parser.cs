@@ -19,7 +19,7 @@ internal class Parser
     public INetstatOutput Parse(string netstatCmdOutput)
     {
         var records = new List<NetstatLine>();
-        var processes = IncludeProcessDetails ? Processes.GetRunningProcesses() : null;
+        var processes = IncludeProcessDetails ? Processes.Running() : null;
 
         var lines = netstatCmdOutput.Split('\n', StringSplitOptions.RemoveEmptyEntries);
 

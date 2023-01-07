@@ -2,10 +2,28 @@ using System.Diagnostics;
 
 namespace DotNetstat;
 
-public sealed record NetstatLine(Process? Process)
+public sealed record NetstatLine
 {
     private int? _foreignPort;
     private int? _localPort;
+
+    public NetstatLine(Process? process)
+    {
+        Process = process;
+        if (process != null)
+        {
+            try
+            {
+                ModuleName = process.MainModule?.ModuleName ?? "";
+            }
+            catch (Exception)
+            {
+                ModuleName = "Not Available";
+            }
+        }
+    }
+
+    public string UniqueId { get; } = Guid.NewGuid().ToString();
 
     public string Protocol { get; init; } = "Unknown";
 
@@ -16,6 +34,10 @@ public sealed record NetstatLine(Process? Process)
     public string State { get; init; } = "Unknown";
 
     public int ProcessId { get; init; } = PortNotSpecified;
+
+    public string ModuleName { get; set; } = "";
+
+    public Process? Process { get; init; }
 
     // ReSharper disable once MemberCanBePrivate.Global
     /// <summary>
