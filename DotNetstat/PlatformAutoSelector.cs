@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-
-namespace DotNetstat;
+﻿namespace DotNetstat;
 
 public static class PlatformAutoSelector
 {

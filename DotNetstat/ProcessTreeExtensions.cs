@@ -10,7 +10,7 @@ public static class ProcessTreeExtensions
         processTree.Flatten(processes);
         return processes;
     }
-    
+
     private static void Flatten(this ProcessTree processTree, ICollection<Process> processes)
     {
         processes.Add(processTree.Process);

@@ -10,16 +10,15 @@ public class NetstatOutput : INetstatOutput
         UnparsedLines = unparsedLines.ToList().AsReadOnly();
         Command = command;
         Success = true;
-        
     }
 
+    public Platform Platform { get; init; }
+
     public IReadOnlyCollection<NetstatLine> Lines { get; init; }
-    
+
     public IReadOnlyCollection<Line> UnparsedLines { get; init; }
 
     public ICommand Command { get; init; }
-
-    public Platform Platform { get; init; }
 
     public bool Success { get; init; }
 
@@ -31,7 +30,6 @@ public class NetstatOutput : INetstatOutput
         {
             var sb = new StringBuilder();
             var allLines = Lines
-                .Cast<Line>()
                 .Concat(UnparsedLines)
                 .OrderBy(x => x.Number)
                 .ToList();

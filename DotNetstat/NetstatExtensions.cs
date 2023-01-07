@@ -9,16 +9,13 @@ public static class NetstatExtensions
         var result = new List<NetstatLine>();
 
         var enumerable = netstatLines as NetstatLine[] ?? netstatLines.ToArray();
-        
+
         var currentProcess = Processes.Running().ByProcessId(processId);
         if (currentProcess == null) return result;
-        
+
         var processTree = currentProcess.GetProcessTree();
         var allProcesses = processTree.Flatten();
-        foreach (var process in allProcesses)
-        {
-            result.AddRange(enumerable.Where(n => n.ProcessId == process.Id));
-        }
+        foreach (var process in allProcesses) result.AddRange(enumerable.Where(n => n.ProcessId == process.Id));
         return result.DistinctBy(r => r.LocalPort);
     }
 

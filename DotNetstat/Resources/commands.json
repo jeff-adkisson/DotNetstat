@@ -7,7 +7,8 @@
     "Arguments": "-n -a -o",
     "Priority": 1,
     "IsPlatformDefault": true,
-    "Regex": "^\\s*(?<proto>\\S+)\\s+(?<local>\\S+)\\s+(?<foreign>\\S+)\\s+(?<state>.+)\\s+(?<pid>\\d+).*$"
+    "Regex": "^\\s*(?<proto>\\S+)\\s+(?<local>\\S+)\\s+(?<foreign>\\S+)\\s+(?<state>.+)\\s+(?<pid>\\d+).*$",
+    "RegexProcessId": "*"
   },
   {
     "PlatformId": 2,
@@ -17,7 +18,8 @@
     "Arguments": "-ltnup",
     "Priority": 1,
     "IsPlatformDefault": true,
-    "Regex": "^\\s*(?\u003Cproto\u003E\\S\u002B)\\s\u002B(?\u003Cstate\u003E\\S\u002B)\\s\u002B(?:\\d)\\s\u002B(?:\\d\u002B)\\s\u002B(?\u003Clocal\u003E\\S\u002B)\\s\u002B(?\u003Cforeign\u003E\\S\u002B)(?\u003Cpid\u003E.\u002B)"
+    "Regex": "^\\s*(?\u003Cproto\u003E\\S\u002B)\\s\u002B(?\u003Cstate\u003E\\S\u002B)\\s\u002B(?:\\d)\\s\u002B(?:\\d\u002B)\\s\u002B(?\u003Clocal\u003E\\S\u002B)\\s\u002B(?\u003Cforeign\u003E\\S\u002B)(?\u003Cpid\u003E.\u002B)",
+    "RegexProcessId": ",pid=(?<pid>\\d+),"
   },
   {
     "PlatformId": 2,
@@ -27,7 +29,8 @@
     "Arguments": "-nlp",
     "Priority": 2,
     "IsPlatformDefault": false,
-    "Regex": "*"
+    "Regex": "*",
+    "RegexProcessId": "*"
   },
   {
     "PlatformId": 2,
@@ -37,6 +40,7 @@
     "Arguments": "-n -a -o",
     "Priority": 3,
     "IsPlatformDefault": false,
-    "Regex": "*"
+    "Regex": "*",
+    "RegexProcessId": "*"
   }
 ]

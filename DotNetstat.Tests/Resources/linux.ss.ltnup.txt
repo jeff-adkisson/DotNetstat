@@ -1,15 +1,23 @@
-Netid State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess
-udp   UNCONN 0      0          127.0.0.1:323        0.0.0.0:*          8675
-udp   UNCONN 0      0              [::1]:323           [::]:*          
-tcp   LISTEN 0      4096               *:2525             *:*          
-tcp   LISTEN 0      4096               *:225              *:*          
-tcp   LISTEN 0      4096               *:5672             *:*          
-tcp   LISTEN 0      4096               *:9000             *:*          
-tcp   LISTEN 0      4096               *:6379             *:*          
-tcp   LISTEN 0      4096               *:26379            *:*          
-tcp   LISTEN 0      4096               *:80               *:*          
-tcp   LISTEN 0      4096               *:8081             *:*          
-tcp   LISTEN 0      4096               *:15672            *:*          
-tcp   LISTEN 0      4096               *:3000             *:*          
-tcp   LISTEN 0      4096               *:21433            *:*          
-tcp   LISTEN 0      4096               *:443              *:*          309
+Netid State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess                                      
+udp   UNCONN 0      0          127.0.0.1:323        0.0.0.0:*                                                
+udp   UNCONN 0      0              [::1]:323           [::]:*                                                
+tcp   LISTEN 0      512        127.0.0.1:7230       0.0.0.0:*    users:(("Connr.App",pid=19201,fd=307))      
+tcp   LISTEN 0      512        127.0.0.1:5216       0.0.0.0:*    users:(("Connr.App",pid=19201,fd=311))      
+tcp   LISTEN 0      512        127.0.0.1:33761      0.0.0.0:*    users:(("dotnet",pid=18898,fd=209))         
+tcp   LISTEN 0      512          0.0.0.0:11111      0.0.0.0:*    users:(("HighMatch.Compa",pid=21015,fd=284))
+tcp   LISTEN 0      512          0.0.0.0:30000      0.0.0.0:*    users:(("HighMatch.Compa",pid=21015,fd=285))
+tcp   LISTEN 0      512        127.0.0.1:39317      0.0.0.0:*    users:(("dotnet",pid=18898,fd=208))         
+tcp   LISTEN 0      4096               *:2525             *:*                                                
+tcp   LISTEN 0      512            [::1]:7230          [::]:*    users:(("Connr.App",pid=19201,fd=310))      
+tcp   LISTEN 0      512            [::1]:5216          [::]:*    users:(("Connr.App",pid=19201,fd=312))      
+tcp   LISTEN 0      4096               *:225              *:*                                                
+tcp   LISTEN 0      4096               *:5672             *:*                                                
+tcp   LISTEN 0      4096               *:9000             *:*                                                
+tcp   LISTEN 0      4096               *:6379             *:*                                                
+tcp   LISTEN 0      4096               *:26379            *:*                                                
+tcp   LISTEN 0      4096               *:80               *:*                                                
+tcp   LISTEN 0      4096               *:8081             *:*                                                
+tcp   LISTEN 0      4096               *:15672            *:*                                                
+tcp   LISTEN 0      4096               *:3000             *:*                                                
+tcp   LISTEN 0      4096               *:21433            *:*                                                
+tcp   LISTEN 0      4096               *:443              *:*                                                

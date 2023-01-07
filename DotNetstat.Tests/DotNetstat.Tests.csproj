@@ -9,9 +9,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="ConsoleTables" Version="2.4.2" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
-        <PackageReference Include="xunit" Version="2.4.2" />
+        <PackageReference Include="ConsoleTables" Version="2.4.2"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2"/>
+        <PackageReference Include="xunit" Version="2.4.2"/>
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
@@ -23,22 +23,22 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\DotNetstat\DotNetstat.csproj" />
+        <ProjectReference Include="..\DotNetstat\DotNetstat.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="OSx" />
+        <Folder Include="OSx"/>
     </ItemGroup>
 
     <ItemGroup>
-        <None Remove="Resources\windows.netstat.n.a.o.txt" />
+        <None Remove="Resources\windows.netstat.n.a.o.txt"/>
         <EmbeddedResource Include="Resources\windows.netstat.n.a.o.txt">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </EmbeddedResource>
-        <None Remove="Resources\linux.ss.ltnup.txt" />
-        <EmbeddedResource Include="Resources\linux.ss.ltnup.txt" />
-        <None Remove="Resources\linux.netstat.nlp.txt" />
-        <EmbeddedResource Include="Resources\linux.netstat.nlp.txt" />
+        <None Remove="Resources\linux.ss.ltnup.txt"/>
+        <EmbeddedResource Include="Resources\linux.ss.ltnup.txt"/>
+        <None Remove="Resources\linux.netstat.nlp.txt"/>
+        <EmbeddedResource Include="Resources\linux.netstat.nlp.txt"/>
     </ItemGroup>
 
 </Project>

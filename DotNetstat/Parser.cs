@@ -1,6 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Dynamic;
-using System.Text.RegularExpressions;
 
 namespace DotNetstat;
 
@@ -14,7 +12,7 @@ internal class Parser
 
     private ICommand Command { get; }
 
-    private bool IncludeProcessDetails { get; init; }
+    private bool IncludeProcessDetails { get; }
 
     public INetstatOutput Parse(string netstatCmdOutput)
     {
@@ -28,7 +26,7 @@ internal class Parser
         {
             var line = lines[index];
             var record = ParseLine(index + 1, line, Command, processes);
-            if (record != null) 
+            if (record != null)
                 parsedLines.Add(record);
             else
                 unparsedLines.Add(new Line(index + 1, line));
@@ -46,6 +44,13 @@ internal class Parser
         var match = command.RegexCompiled.Match(line);
         if (!match.Success) return null;
         if (!int.TryParse(match.Groups["pid"].Value, out var processId)) processId = 0;
+
+        if (processId == 0 && command.RegexProcessId != "*")
+        {
+            var processIdMatch = command.RegexProcessIdCompiled.Match(match.Groups["pid"].Value);
+            if (!int.TryParse(processIdMatch.Groups["pid"].Value, out processId)) processId = 0;
+        }
+        
         var process = dictionary != null && dictionary.TryGetValue(processId, out var value)
             ? value
             : null;

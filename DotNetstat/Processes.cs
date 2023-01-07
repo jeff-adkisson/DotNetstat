@@ -10,7 +10,7 @@ public static class Processes
             .GetProcesses()
             .ToDictionary(key => key.Id, val => val);
     }
-    
+
     public static Process? ByProcessId(int processId)
     {
         try

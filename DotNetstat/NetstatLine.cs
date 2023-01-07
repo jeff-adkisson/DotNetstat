@@ -11,7 +11,6 @@ public sealed record NetstatLine : Line
     {
         Process = process;
         if (process != null)
-        {
             try
             {
                 ModuleName = process.MainModule?.ModuleName ?? "";
@@ -20,7 +19,6 @@ public sealed record NetstatLine : Line
             {
                 ModuleName = "Not Available";
             }
-        }
     }
 
     public string Protocol { get; init; } = "Unknown";
@@ -58,9 +56,10 @@ public sealed record NetstatLine : Line
         var parsed = int.TryParse(parts[1], out var port);
         return parsed ? port : PortNotSpecified;
     }
-    
+
     public override string ToString()
     {
-        return $"Proto {Protocol} | Local {LocalAddress}, {LocalPort} | Foreign {ForeignAddress} {ForeignPort} | State {State} | Process {ProcessId}";
+        return
+            $"Proto {Protocol} | Local {LocalAddress}, {LocalPort} | Foreign {ForeignAddress} {ForeignPort} | State {State} | Process {ProcessId}";
     }
 }

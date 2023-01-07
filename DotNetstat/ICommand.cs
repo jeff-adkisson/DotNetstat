@@ -14,4 +14,6 @@ public interface ICommand
     bool IsPlatformDefault { get; }
     public string Regex { get; init; }
     public Regex RegexCompiled { get; }
+    public string RegexProcessId { get; init; }
+    public Regex RegexProcessIdCompiled { get; }
 }
