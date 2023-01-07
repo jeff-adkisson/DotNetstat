@@ -4,27 +4,26 @@ namespace DotNetstat;
 
 public class Netstat
 {
-    public static IEnumerable<NetstatLine> Call(bool includeProcessDetails = true)
+    public static INetstatOutput Call(bool includeProcessDetails = true)
     {
         return Call(Platform.Automatic, includeProcessDetails);
     }
 
-    public static IEnumerable<NetstatLine> Call(Flavor flavor, bool includeProcessDetails = true)
+    public static INetstatOutput Call(ICommand command, bool includeProcessDetails = true)
     {
-        var cmd = flavor.Command();
-        var output = ExecuteCommand(cmd);
-        return ParserFactory.GetParser(flavor.RelatedPlatform(), includeProcessDetails).Parse(output);
+        var output = ExecuteCommand(command);
+        return ParserFactory.Get(command.PlatformEnum, includeProcessDetails).Parse(output);
     }
 
-    public static IEnumerable<NetstatLine> Call(Platform platform, bool includeProcessDetails = true)
+    public static INetstatOutput Call(Platform platform, bool includeProcessDetails = true)
     {
-        var cmd = platform.Command();
+        var cmd = platform.DefaultCommand();
         var output = ExecuteCommand(cmd);
-        var parser = ParserFactory.GetParser(platform, includeProcessDetails);
+        var parser = ParserFactory.Get(platform, includeProcessDetails);
         return parser.Parse(output);
     }
 
-    private static string ExecuteCommand(Command cmd)
+    private static string ExecuteCommand(ICommand cmd)
     {
         var process = new Process
         {

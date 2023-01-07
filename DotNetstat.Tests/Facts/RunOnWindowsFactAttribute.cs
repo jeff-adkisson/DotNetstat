@@ -1,4 +1,4 @@
-namespace DotNetstat.Tests;
+namespace DotNetstat.Tests.Facts;
 
 public sealed class RunOnWindowsFactAttribute : FactAttribute
 {

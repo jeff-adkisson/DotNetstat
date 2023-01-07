@@ -1,0 +1,69 @@
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp6       0      0 :::2525                 :::*                    LISTEN      -                   
+tcp6       0      0 :::3000                 :::*                    LISTEN      -                   
+tcp6       0      0 :::26379                :::*                    LISTEN      -                   
+tcp6       0      0 :::443                  :::*                    LISTEN      -                   
+tcp6       0      0 :::225                  :::*                    LISTEN      -                   
+tcp6       0      0 :::80                   :::*                    LISTEN      -                   
+tcp6       0      0 :::9000                 :::*                    LISTEN      -                   
+tcp6       0      0 :::15672                :::*                    LISTEN      -                   
+tcp6       0      0 :::8081                 :::*                    LISTEN      -                   
+tcp6       0      0 :::6379                 :::*                    LISTEN      -                   
+tcp6       0      0 :::5672                 :::*                    LISTEN      -                   
+tcp6       0      0 :::21433                :::*                    LISTEN      -                   
+udp        0      0 127.0.0.1:323           0.0.0.0:*                           -                   
+udp6       0      0 ::1:323                 :::*                                -                   
+Active UNIX domain sockets (only servers)
+Proto RefCnt Flags       Type       State         I-Node   PID/Program name     Path
+unix  2      [ ACC ]     STREAM     LISTENING     148562   -                    /run/WSL/1_interop
+unix  2      [ ACC ]     STREAM     LISTENING     140976   -                    /run/WSL/1_interop
+unix  2      [ ACC ]     STREAM     LISTENING     24705    -                    /run/WSL/1_interop
+unix  2      [ ACC ]     STREAM     LISTENING     24692    -                    /run/WSL/1_interop
+unix  2      [ ACC ]     STREAM     LISTENING     28706    -                    /run/WSL/1_interop
+unix  2      [ ACC ]     STREAM     LISTENING     28689    -                    /run/WSL/1_interop
+unix  2      [ ACC ]     STREAM     LISTENING     148568   -                    /run/WSL/9_interop
+unix  2      [ ACC ]     STREAM     LISTENING     22604    -                    /run/WSL/7_interop
+unix  2      [ ACC ]     STREAM     LISTENING     143432   -                    /var/run/dbus/system_bus_socket
+unix  2      [ ACC ]     STREAM     LISTENING     19539    -                    /var/run/dbus/system_bus_socket
+unix  2      [ ACC ]     STREAM     LISTENING     40       -                    /var/run/dbus/system_bus_socket
+unix  2      [ ACC ]     SEQPACKET  LISTENING     146526   -                    /mnt/wslg/weston-notify.sock
+unix  2      [ ACC ]     SEQPACKET  LISTENING     21527    -                    /mnt/wslg/weston-notify.sock
+unix  2      [ ACC ]     SEQPACKET  LISTENING     24643    -                    /mnt/wslg/weston-notify.sock
+unix  2      [ ACC ]     STREAM     LISTENING     27706    -                    /run/WSL/23_interop
+unix  2      [ ACC ]     STREAM     LISTENING     145496   -                    /mnt/wslg/runtime-dir/wayland-0
+unix  2      [ ACC ]     STREAM     LISTENING     29724    -                    /mnt/wslg/runtime-dir/wayland-0
+unix  2      [ ACC ]     STREAM     LISTENING     29702    -                    /mnt/wslg/runtime-dir/wayland-0
+unix  2      [ ACC ]     STREAM     LISTENING     145497   -                    /tmp/.X11-unix/X0
+unix  2      [ ACC ]     STREAM     LISTENING     29725    -                    /tmp/.X11-unix/X0
+unix  2      [ ACC ]     STREAM     LISTENING     29703    -                    /tmp/.X11-unix/X0
+unix  2      [ ACC ]     STREAM     LISTENING     19569    -                    /run/WSL/36_interop
+unix  2      [ ACC ]     STREAM     LISTENING     18556    -                    /run/host-services/filesystem.sock
+unix  2      [ ACC ]     STREAM     LISTENING     28732    -                    /run/host-services/extension-manager.sock
+unix  2      [ ACC ]     STREAM     LISTENING     21547    -                    /run/host-services/ntp.udp.sock
+unix  2      [ ACC ]     STREAM     LISTENING     145525   -                    /mnt/wslg/runtime-dir/pulse/native
+unix  2      [ ACC ]     STREAM     LISTENING     19577    -                    /run/host-services/hubproxy.sock
+unix  2      [ ACC ]     STREAM     LISTENING     22597    -                    /mnt/wslg/runtime-dir/pulse/native
+unix  2      [ ACC ]     STREAM     LISTENING     19515    -                    /mnt/wslg/runtime-dir/pulse/native
+unix  2      [ ACC ]     STREAM     LISTENING     21559    -                    /mnt/wslg/PulseAudioRDPSource
+unix  2      [ ACC ]     STREAM     LISTENING     72       -                    /run/host-services/socks.sock
+unix  2      [ ACC ]     STREAM     LISTENING     29716    -                    /mnt/wslg/PulseAudioRDPSource
+unix  2      [ ACC ]     STREAM     LISTENING     75       -                    /mnt/wslg/PulseAudioRDPSink
+unix  2      [ ACC ]     STREAM     LISTENING     28734    -                    /run/host-services/vpnkit.sock
+unix  2      [ ACC ]     STREAM     LISTENING     24690    -                    /mnt/wslg/PulseAudioRDPSink
+unix  2      [ ACC ]     STREAM     LISTENING     19579    -                    /run/host-services/dns.system.grpc.sock
+unix  2      [ ACC ]     STREAM     LISTENING     19581    -                    /run/host-services/vpnkit-data.sock
+unix  2      [ ACC ]     STREAM     LISTENING     17332    -                    /run/host-services/backend.native.sock
+unix  2      [ ACC ]     STREAM     LISTENING     17334    -                    /run/host-services/backend.sock
+unix  2      [ ACC ]     STREAM     LISTENING     17337    -                    /run/host-services/dns.internal.grpc.sock
+unix  2      [ ACC ]     STREAM     LISTENING     19585    -                    /run/host-services/docker.proxy.sock
+unix  2      [ ACC ]     STREAM     LISTENING     27731    -                    /run/guest-services/wsl-cross-distro.sock
+unix  2      [ ACC ]     STREAM     LISTENING     21589    -                    /run/guest-services/wsl2-bootstrap-expose-ports.sock
+unix  2      [ ACC ]     STREAM     LISTENING     145531   -                    /mnt/wslg/PulseServer
+unix  2      [ ACC ]     STREAM     LISTENING     146545   -                    /mnt/wslg/PulseAudioRDPSource
+unix  2      [ ACC ]     STREAM     LISTENING     141998   -                    /mnt/wslg/PulseAudioRDPSink
+unix  2      [ ACC ]     STREAM     LISTENING     22629    -                    /mnt/wslg/PulseServer
+unix  2      [ ACC ]     STREAM     LISTENING     25645    -                    /mnt/wslg/PulseServer
+unix  2      [ ACC ]     STREAM     LISTENING     17840    -                    @/tmp/dbus-AqfX2dbsfm
+unix  2      [ ACC ]     STREAM     LISTENING     22563    -                    @/tmp/dbus-mwBYDSXJla
+unix  2      [ ACC ]     STREAM     LISTENING     145517   -                    @/tmp/dbus-4pqUTBtAoQ

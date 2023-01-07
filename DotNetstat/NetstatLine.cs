@@ -2,15 +2,10 @@ using System.Diagnostics;
 
 namespace DotNetstat;
 
-public sealed record NetstatLine
+public sealed record NetstatLine(Process? Process)
 {
     private int? _foreignPort;
     private int? _localPort;
-
-    public NetstatLine(Process? process)
-    {
-        Process = process;
-    }
 
     public string Protocol { get; init; } = "Unknown";
 
@@ -21,8 +16,6 @@ public sealed record NetstatLine
     public string State { get; init; } = "Unknown";
 
     public int ProcessId { get; init; } = PortNotSpecified;
-
-    public Process? Process { get; init; }
 
     // ReSharper disable once MemberCanBePrivate.Global
     /// <summary>
@@ -44,5 +37,10 @@ public sealed record NetstatLine
         if (parts.Length != 2) return PortNotSpecified;
         var parsed = int.TryParse(parts[1], out var port);
         return parsed ? port : PortNotSpecified;
+    }
+    
+    public override string ToString()
+    {
+        return $"Proto {Protocol} | Local {LocalAddress}, {LocalPort} | Foreign {ForeignAddress} {ForeignPort} | State {State} | Process {ProcessId}";
     }
 }

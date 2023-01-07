@@ -14,4 +14,18 @@
         <PackageDescription>Simplifies matching process ID to port across platforms</PackageDescription>
     </PropertyGroup>
 
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+            <_Parameter1>DotNetstat.Tests</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="Commands.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="Resources\commands.json" />
+    </ItemGroup>
+
 </Project>

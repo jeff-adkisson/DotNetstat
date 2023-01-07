@@ -1,43 +1,46 @@
 ﻿using System.Diagnostics;
+using System.Dynamic;
 using System.Text.RegularExpressions;
 
 namespace DotNetstat;
 
-internal partial class NetstatParserWindows : NetstatParserBase
+internal class Parser
 {
-    public NetstatParserWindows(bool includeProcessDetails)
-        : base(includeProcessDetails)
+    public Parser(ICommand command, bool includeProcessDetails)
     {
+        Command = command;
+        IncludeProcessDetails = includeProcessDetails;
     }
 
-    public override IEnumerable<NetstatLine> Parse(string netstatCmdOutput)
+    private ICommand Command { get; }
+
+    private bool IncludeProcessDetails { get; init; }
+
+    public INetstatOutput Parse(string netstatCmdOutput)
     {
         var records = new List<NetstatLine>();
         var processes = IncludeProcessDetails ? Processes.GetRunningProcesses() : null;
 
-        var lines = netstatCmdOutput.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+        var lines = netstatCmdOutput.Split('\n', StringSplitOptions.RemoveEmptyEntries);
 
         for (var index = 0; index < lines.Length; index++)
         {
             var line = lines[index];
-
-            if (!string.IsNullOrWhiteSpace(line) && line.Trim().ToLower().StartsWith("proto"))
-                continue;
-
-            var record = ParseLine(line, processes);
+            var record = ParseLine(line, Command, processes);
             if (record != null) records.Add(record);
         }
 
-        return records;
+        return new NetstatOutput(Command, netstatCmdOutput, records.AsReadOnly());
     }
 
     private static NetstatLine? ParseLine(
         string line,
+        ICommand command,
         Dictionary<int, Process>? dictionary)
     {
-        var match = ExtractNetstatRecordRegex().Match(line);
+        var match = command.RegexCompiled.Match(line);
         if (!match.Success) return null;
-        var processId = int.Parse(match.Groups["pid"].Value);
+        if (!int.TryParse(match.Groups["pid"].Value, out var processId)) processId = 0;
         var process = dictionary != null && dictionary.TryGetValue(processId, out var value)
             ? value
             : null;
@@ -51,7 +54,4 @@ internal partial class NetstatParserWindows : NetstatParserBase
             ProcessId = processId
         };
     }
-
-    [GeneratedRegex("^\\s*(?<proto>\\S+)\\s+(?<local>\\S+)\\s+(?<foreign>\\S+)\\s+(?<state>\\S+)\\s+(?<pid>\\d+)")]
-    private static partial Regex ExtractNetstatRecordRegex();
 }
