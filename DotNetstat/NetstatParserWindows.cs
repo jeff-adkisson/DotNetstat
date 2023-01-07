@@ -13,7 +13,7 @@ internal partial class NetstatParserWindows : NetstatParserBase
     public override IEnumerable<NetstatLine> Parse(string netstatCmdOutput)
     {
         var records = new List<NetstatLine>();
-        var processes = IncludeProcessDetails ? Processes.GetRunningProcesses() : null;
+        var processes = IncludeProcessDetails ? Processes.Running() : null;
 
         var lines = netstatCmdOutput.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 

@@ -14,4 +14,8 @@
         <PackageDescription>Simplifies matching process ID to port across platforms</PackageDescription>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="System.Management" Version="7.0.0" />
+    </ItemGroup>
+
 </Project>
