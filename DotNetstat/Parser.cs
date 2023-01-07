@@ -18,22 +18,27 @@ internal class Parser
 
     public INetstatOutput Parse(string netstatCmdOutput)
     {
-        var records = new List<NetstatLine>();
+        var parsedLines = new List<NetstatLine>();
+        var unparsedLines = new List<Line>();
         var processes = IncludeProcessDetails ? Processes.Running() : null;
 
-        var lines = netstatCmdOutput.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+        var lines = netstatCmdOutput.Split('\n');
 
         for (var index = 0; index < lines.Length; index++)
         {
             var line = lines[index];
-            var record = ParseLine(line, Command, processes);
-            if (record != null) records.Add(record);
+            var record = ParseLine(index + 1, line, Command, processes);
+            if (record != null) 
+                parsedLines.Add(record);
+            else
+                unparsedLines.Add(new Line(index + 1, line));
         }
 
-        return new NetstatOutput(Command, netstatCmdOutput, records.AsReadOnly());
+        return new NetstatOutput(Command, parsedLines, unparsedLines);
     }
 
     private static NetstatLine? ParseLine(
+        int lineNumber,
         string line,
         ICommand command,
         Dictionary<int, Process>? dictionary)
@@ -45,7 +50,7 @@ internal class Parser
             ? value
             : null;
 
-        return new NetstatLine(process)
+        return new NetstatLine(lineNumber, line, process)
         {
             Protocol = match.Groups["proto"].Value,
             LocalAddress = match.Groups["local"].Value,

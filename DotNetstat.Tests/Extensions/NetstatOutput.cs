@@ -6,7 +6,7 @@ public static class NetstatOutputExtensions
 {
     public static string WriteLinesToTable(this INetstatOutput netstatOutput) =>
         ConsoleTable
-            .From(netstatOutput.Lines)
+            .From(netstatOutput.Lines.Select(line => new { line.Number, line.Protocol, line.LocalAddress, line.ForeignAddress, line.State, line.ProcessId}))
             .Configure(o => o.NumberAlignment = Alignment.Right)
             .ToString();
 

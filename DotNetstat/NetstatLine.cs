@@ -2,12 +2,12 @@ using System.Diagnostics;
 
 namespace DotNetstat;
 
-public sealed record NetstatLine
+public sealed record NetstatLine : Line
 {
     private int? _foreignPort;
     private int? _localPort;
 
-    public NetstatLine(Process? process)
+    public NetstatLine(int lineNbr, string originalLine, Process? process) : base(lineNbr, originalLine)
     {
         Process = process;
         if (process != null)
@@ -22,8 +22,6 @@ public sealed record NetstatLine
             }
         }
     }
-
-    public string UniqueId { get; } = Guid.NewGuid().ToString();
 
     public string Protocol { get; init; } = "Unknown";
 

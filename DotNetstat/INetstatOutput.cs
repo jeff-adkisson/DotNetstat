@@ -2,9 +2,11 @@
 
 public interface INetstatOutput
 {
-    string OriginalOutput { get; init; }
+    string OriginalOutput { get; }
     
     IReadOnlyCollection<NetstatLine> Lines { get; init; }
+    
+    IReadOnlyCollection<Line> UnparsedLines { get; init; }
 
     ICommand Command { get; init; }
 

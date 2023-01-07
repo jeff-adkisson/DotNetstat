@@ -7,7 +7,7 @@
     "Arguments": "-n -a -o",
     "Priority": 1,
     "IsPlatformDefault": true,
-    "Regex": "^\\s*(?\u003Cproto\u003E\\S\u002B)\\s\u002B(?\u003Clocal\u003E\\S\u002B)\\s\u002B(?\u003Cforeign\u003E\\S\u002B)\\s\u002B(?\u003Cstate\u003E\\S\u002B)\\s\u002B(?\u003Cpid\u003E\\d\u002B).*$"
+    "Regex": "^\\s*(?<proto>\\S+)\\s+(?<local>\\S+)\\s+(?<foreign>\\S+)\\s+(?<state>.+)\\s+(?<pid>\\d+).*$"
   },
   {
     "PlatformId": 2,

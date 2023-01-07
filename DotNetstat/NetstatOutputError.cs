@@ -2,8 +2,8 @@
 
 public class NetstatOutputError : NetstatOutput
 {
-    public NetstatOutputError(string error, ICommand command, string originalOutput, IReadOnlyCollection<NetstatLine>? lines = null)
-        : base(command, originalOutput, lines ?? new List<NetstatLine>().AsReadOnly())
+    public NetstatOutputError(string error, ICommand command, IReadOnlyCollection<NetstatLine>? lines = null, IReadOnlyCollection<NetstatLine>? unparsedLines = null)
+        : base(command, lines ?? new List<NetstatLine>(), unparsedLines ?? new List<NetstatLine>())
     {
         Success = false;
         Error = error;

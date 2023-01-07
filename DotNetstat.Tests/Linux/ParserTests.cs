@@ -6,14 +6,10 @@ using Xunit.Abstractions;
 
 namespace DotNetstat.Tests.Linux;
 
-public class ParserTests
+public class ParserTests : TestBase
 {
-    private readonly ITestOutputHelper _output;
-    
-    public ParserTests(ITestOutputHelper output)
-    {
-        _output = output;
-    }
+    public ParserTests(ITestOutputHelper output) : base(output)
+    {}
     
     [Fact]
     public void TestParser()
@@ -26,6 +22,6 @@ public class ParserTests
         Assert.All(results.Lines.ToArray()[2..^1], l=> Assert.Equal(0, l.ProcessId));
         Assert.True(results.Lines.Last().ProcessId == 309);
 
-        _output.WriteLine(results.WriteLinesAndOriginalOutput());
+        Output.WriteLine(results.WriteLinesAndOriginalOutput());
     }
 }
