@@ -21,7 +21,7 @@ public sealed class ProcessTree
         var childProcesses = Process.GetChildProcesses(processes);
         depth++;
 
-        if (depth > 10) 
+        if (depth > 5) 
             return;
         foreach (var childProcess in childProcesses)
             ChildProcesses.Add(new ProcessTree(childProcess, processes, depth));
