@@ -23,13 +23,3 @@ using DotNetStat;
 
 var results = NetStat.Call(Platform.Windows);
 ```
-
-## Specify Command Flavor
-
-This is the most specific approach.
-
-```csharp
-using DotNetStat;
-
-var results = NetStat.Call(Flavor.Windows);
-```
