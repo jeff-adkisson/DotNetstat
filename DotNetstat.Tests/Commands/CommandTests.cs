@@ -11,6 +11,6 @@ public class CommandTests : TestBase
     [Fact]
     public void OutputCommands()
     {
-        foreach (var command in DotNetstat.Commands.All) Output.WriteLine($"{command.Platform} | {command.Regex}");
+        foreach (var command in DotNetstat.Commands.Items) Output.WriteLine($"{command.Platform} | {command.Regex}");
     }
 }

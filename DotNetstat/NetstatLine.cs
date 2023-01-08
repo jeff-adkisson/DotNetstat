@@ -31,7 +31,7 @@ public sealed record NetstatLine : Line
 
     public int ProcessId { get; init; } = PortNotSpecified;
 
-    public string ModuleName { get; set; } = "";
+    public string ModuleName { get; init; } = "";
 
     public Process? Process { get; init; }
 

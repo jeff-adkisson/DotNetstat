@@ -2,9 +2,9 @@
 
 namespace DotNetstat;
 
-internal class Parser
+internal sealed class Parser
 {
-    public Parser(ICommand command, bool includeProcessDetails)
+    internal Parser(ICommand command, bool includeProcessDetails)
     {
         Command = command;
         IncludeProcessDetails = includeProcessDetails;
@@ -14,7 +14,7 @@ internal class Parser
 
     private bool IncludeProcessDetails { get; }
 
-    public INetstatOutput Parse(string netstatCmdOutput)
+    internal INetstatOutput Parse(string netstatCmdOutput)
     {
         var parsedLines = new List<NetstatLine>();
         var unparsedLines = new List<Line>();
@@ -39,7 +39,7 @@ internal class Parser
         int lineNumber,
         string line,
         ICommand command,
-        Dictionary<int, Process>? dictionary)
+        IReadOnlyDictionary<int, Process>? dictionary)
     {
         var match = command.RegexCompiled.Match(line);
         if (!match.Success) return null;

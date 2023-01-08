@@ -2,12 +2,12 @@
 
 internal static class ParserFactory
 {
-    public static Parser Get(Platform platform, bool includeProcessDetails)
+    internal static Parser Get(Platform platform, bool includeProcessDetails)
     {
         return Get(platform.DefaultCommand(), includeProcessDetails);
     }
 
-    public static Parser Get(ICommand command, bool includeProcessDetails)
+    private static Parser Get(ICommand command, bool includeProcessDetails)
     {
         return new Parser(command, includeProcessDetails);
     }

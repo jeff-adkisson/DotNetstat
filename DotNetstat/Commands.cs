@@ -8,17 +8,17 @@ public static class Commands
 {
     private const string CommandsFile = "commands.json";
 
-    private static ReadOnlyCollection<ICommand>? _readOnlyCommands;
+    private static ReadOnlyCollection<ICommand>? ReadOnlyCommands { get; set; }
 
-    public static ReadOnlyCollection<ICommand> All
+    public static ReadOnlyCollection<ICommand> Items
     {
         get
         {
-            if (_readOnlyCommands != null) return _readOnlyCommands;
+            if (ReadOnlyCommands != null) return ReadOnlyCommands;
 
             var commandJson = ResourceGetter.Get(CommandsFile);
             var commands = JsonSerializer.Deserialize<List<Command>>(commandJson);
-            return _readOnlyCommands = commands!.Cast<ICommand>().ToList().AsReadOnly();
+            return ReadOnlyCommands = commands!.Cast<ICommand>().ToList().AsReadOnly();
         }
     }
 
@@ -27,14 +27,14 @@ public static class Commands
         if (platform == Platform.Automatic)
             platform = PlatformAutoSelector.Select();
 
-        var command = All.FirstOrDefault(c => c.PlatformId == (int)platform && c.IsPlatformDefault);
-        if (command == null) throw new Exception($"No default command found for platform [{platform}]");
+        var command = Items.FirstOrDefault(c => c.PlatformId == (int)platform && c.IsPlatformDefault);
+        if (command == null) throw new ArgumentException($"No default command found for platform [{platform}]");
         return command;
     }
 
     public static ICommand? ById(string id)
     {
         id = (id ?? "").Trim();
-        return All.FirstOrDefault(c => c.Id.Equals(id, StringComparison.InvariantCultureIgnoreCase));
+        return Items.FirstOrDefault(c => c.Id.Equals(id, StringComparison.InvariantCultureIgnoreCase));
     }
 }

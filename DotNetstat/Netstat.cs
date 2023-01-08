@@ -2,7 +2,7 @@
 
 namespace DotNetstat;
 
-public class Netstat
+public static class Netstat
 {
     public static INetstatOutput Call(bool includeProcessDetails = true)
     {
