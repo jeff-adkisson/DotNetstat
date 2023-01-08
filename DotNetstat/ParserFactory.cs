@@ -9,6 +9,6 @@ internal static class ParserFactory
 
     public static Parser Get(ICommand command, bool includeProcessDetails)
     {
-        return new(command, includeProcessDetails);
+        return new Parser(command, includeProcessDetails);
     }
 }

@@ -15,10 +15,7 @@ public static class NetstatExtensions
 
         var processTree = currentProcess.GetProcessTree();
         var allProcesses = processTree.Flatten();
-        foreach (var process in allProcesses)
-        {
-            result.AddRange(enumerable.Where(n => n.ProcessId == process.Id));
-        }
+        foreach (var process in allProcesses) result.AddRange(enumerable.Where(n => n.ProcessId == process.Id));
         return result.DistinctBy(r => r.LocalPort);
     }
 

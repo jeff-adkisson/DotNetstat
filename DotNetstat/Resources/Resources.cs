@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace DotNetstat.Tests.Helpers;
+namespace DotNetstat.Resources;
 
 public static class ResourceGetter
 {

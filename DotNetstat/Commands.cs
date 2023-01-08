@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Text.Json;
-using DotNetstat.Tests.Helpers;
+using DotNetstat.Resources;
 
 namespace DotNetstat;
 

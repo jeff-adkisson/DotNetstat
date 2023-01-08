@@ -50,7 +50,7 @@ internal class Parser
             var processIdMatch = command.RegexProcessIdCompiled.Match(match.Groups["pid"].Value);
             if (!int.TryParse(processIdMatch.Groups["pid"].Value, out processId)) processId = 0;
         }
-        
+
         var process = dictionary != null && dictionary.TryGetValue(processId, out var value)
             ? value
             : null;
