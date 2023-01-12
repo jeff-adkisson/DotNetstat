@@ -12,7 +12,7 @@ public sealed class Tree
         Process = process;
         ChildProcesses = new List<Tree>();
 
-        var childProcesses = Process.GetChildProcesses(processes);
+        var childProcesses = Process.GetChildren(processes);
         depth++;
 
         if (depth > 5)

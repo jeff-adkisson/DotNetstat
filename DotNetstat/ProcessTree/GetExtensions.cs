@@ -10,18 +10,18 @@ public static class GetExtensions
 {
     private static readonly ICommand LinuxShellCommand = new Command(Platform.Linux, "ps -ef");
 
-    internal static Tree GetProcessTree(this Process parentProcess)
+    public static Tree GetTree(this Process parentProcess)
     {
         var processes = Processes.Running();
         return new Tree(parentProcess, processes);
     }
 
-    public static List<Process> GetChildProcesses(this Process process)
+    public static List<Process> GetChildren(this Process process)
     {
-        return process.GetChildProcesses(Processes.Running());
+        return process.GetChildren(Processes.Running());
     }
 
-    internal static List<Process> GetChildProcesses(this Process process, Dictionary<int, Process> dictionary)
+    internal static List<Process> GetChildren(this Process process, Dictionary<int, Process> dictionary)
     {
 #pragma warning disable CA1416
         if (OperatingSystem.IsWindows()) return process.GetChildProcessesOnWindows(dictionary);
