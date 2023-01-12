@@ -2,21 +2,31 @@
 using System.Management;
 using System.Runtime.Versioning;
 using System.Text.RegularExpressions;
+using DotNetstat.Shell;
 
-namespace DotNetstat;
+namespace DotNetstat.ProcessTree;
 
-public static class ProcessExtensions
+public static class GetExtensions
 {
-    public static ProcessTree GetProcessTree(this Process process)
+    private static readonly ICommand LinuxShellCommand = new Command(Platform.Linux, "ps -ef");
+
+    internal static Tree GetProcessTree(this Process parentProcess)
     {
-        return ProcessTree.Factory(process);
+        var processes = Processes.Running();
+        return new Tree(parentProcess, processes);
     }
 
-    public static List<Process> GetChildProcesses(this Process process, Dictionary<int, Process> dictionary)
+    public static List<Process> GetChildProcesses(this Process process)
+    {
+        return process.GetChildProcesses(Processes.Running());
+    }
+
+    internal static List<Process> GetChildProcesses(this Process process, Dictionary<int, Process> dictionary)
     {
 #pragma warning disable CA1416
         if (OperatingSystem.IsWindows()) return process.GetChildProcessesOnWindows(dictionary);
         if (OperatingSystem.IsLinux()) return process.GetChildProcessesOnLinux(dictionary);
+        if (OperatingSystem.IsMacOSx()) throw new PlatformNotSupportedException("GetChildProcesses does not support MacOS yet");
 #pragma warning restore CA1416
 
         return new List<Process>();
@@ -62,7 +72,7 @@ public static class ProcessExtensions
 
         if (!OperatingSystem.IsLinux()) return results;
 
-        var psOutput = "ps -ef".Bash();
+        var psOutput = Platform.Linux.ExecuteShellCommand(LinuxShellCommand);
         var regex = new Regex(@"^\s*(?:\S+)\s+(?<pid>\d+)\s+(?<ppid>\d+).*$", RegexOptions.Multiline);
         var matches = regex.Matches(psOutput);
 

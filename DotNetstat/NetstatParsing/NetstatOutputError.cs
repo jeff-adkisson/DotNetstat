@@ -1,4 +1,4 @@
-﻿namespace DotNetstat;
+﻿namespace DotNetstat.NetstatParsing;
 
 public class NetstatOutputError : NetstatOutput
 {

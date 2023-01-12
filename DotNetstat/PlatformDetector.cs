@@ -1,8 +1,8 @@
 ﻿namespace DotNetstat;
 
-public static class PlatformAutoSelector
+internal static class PlatformDetector
 {
-    public static Platform Select()
+    internal static Platform Detect()
     {
         if (OperatingSystem.IsWindows()) return Platform.Windows;
         if (OperatingSystem.IsLinux()) return Platform.Linux;

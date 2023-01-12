@@ -1,46 +1,50 @@
 ﻿[
   {
-    "PlatformId": 1,
     "Platform": "windows",
-    "Id": "automatic",
+    "Id": "windows",
     "Name": "netstat",
     "Arguments": "-n -a -o",
     "Priority": 1,
     "IsPlatformDefault": true,
-    "Regex": "^\\s*(?<proto>\\S+)\\s+(?<local>\\S+)\\s+(?<foreign>\\S+)\\s+(?<state>.+)\\s+(?<pid>\\d+).*$",
-    "RegexProcessId": "*"
+    "Parsing": {
+      "NetstatParserRegex": "^\\s*(?<proto>\\S+)\\s+(?<local>\\S+)\\s+(?<foreign>\\S+)\\s+(?<state>.+)\\s+(?<pid>\\d+).*$",
+      "ProcessIdParserRegex": ""
+    }
   },
   {
-    "PlatformId": 2,
     "Platform": "linux",
     "Id": "linux",
     "Name": "ss",
     "Arguments": "-ltnup",
     "Priority": 1,
     "IsPlatformDefault": true,
-    "Regex": "^\\s*(?\u003Cproto\u003E\\S\u002B)\\s\u002B(?\u003Cstate\u003E\\S\u002B)\\s\u002B(?:\\d)\\s\u002B(?:\\d\u002B)\\s\u002B(?\u003Clocal\u003E\\S\u002B)\\s\u002B(?\u003Cforeign\u003E\\S\u002B)(?\u003Cpid\u003E.\u002B)",
-    "RegexProcessId": ",pid=(?<pid>\\d+),"
+    "Parsing": {
+      "NetstatParserRegex": "^\\s*(?\u003Cproto\u003E\\S\u002B)\\s\u002B(?\u003Cstate\u003E\\S\u002B)\\s\u002B(?:\\d)\\s\u002B(?:\\d\u002B)\\s\u002B(?\u003Clocal\u003E\\S\u002B)\\s\u002B(?\u003Cforeign\u003E\\S\u002B)(?\u003Cpid\u003E.\u002B)",
+      "ProcessIdParserRegex": ",pid=(?<pid>\\d+),"
+    }
   },
   {
-    "PlatformId": 2,
     "Platform": "linux",
     "Id": "linux-netstat-nlp",
     "Name": "netstat",
     "Arguments": "-nlp",
     "Priority": 2,
     "IsPlatformDefault": false,
-    "Regex": "*",
-    "RegexProcessId": "*"
+    "Parsing": {
+      "NetstatParserRegex": "^\\s*(?\u003Cproto\u003E\\S\u002B)\\s\u002B(?\u003Cstate\u003E\\S\u002B)\\s\u002B(?:\\d)\\s\u002B(?:\\d\u002B)\\s\u002B(?\u003Clocal\u003E\\S\u002B)\\s\u002B(?\u003Cforeign\u003E\\S\u002B)(?\u003Cpid\u003E.\u002B)",
+      "ProcessIdParserRegex": ",pid=(?<pid>\\d+),"
+    }
   },
   {
-    "PlatformId": 2,
     "Platform": "linux",
     "Id": "linux-netstat-n-a-o",
     "Name": "netstat",
     "Arguments": "-n -a -o",
     "Priority": 3,
     "IsPlatformDefault": false,
-    "Regex": "*",
-    "RegexProcessId": "*"
+    "Parsing": {
+      "NetstatParserRegex": "^\\s*(?\u003Cproto\u003E\\S\u002B)\\s\u002B(?\u003Cstate\u003E\\S\u002B)\\s\u002B(?:\\d)\\s\u002B(?:\\d\u002B)\\s\u002B(?\u003Clocal\u003E\\S\u002B)\\s\u002B(?\u003Cforeign\u003E\\S\u002B)(?\u003Cpid\u003E.\u002B)",
+      "ProcessIdParserRegex": ",pid=(?<pid>\\d+),"
+    }
   }
 ]

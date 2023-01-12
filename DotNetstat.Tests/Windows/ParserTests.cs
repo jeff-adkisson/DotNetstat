@@ -1,4 +1,5 @@
-﻿using DotNetstat.Tests.Extensions;
+﻿using DotNetstat.NetstatParsing;
+using DotNetstat.Tests.Extensions;
 using DotNetstat.Tests.Resources;
 using Xunit.Abstractions;
 

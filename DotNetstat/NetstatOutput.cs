@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using DotNetstat.NetstatParsing;
 
 namespace DotNetstat;
 

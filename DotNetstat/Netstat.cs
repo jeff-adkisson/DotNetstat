@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using DotNetstat.NetstatParsing;
 
 namespace DotNetstat;
 
@@ -12,7 +13,7 @@ public static class Netstat
     public static INetstatOutput Call(ICommand command, bool includeProcessDetails = true)
     {
         var output = ExecuteCommand(command);
-        return ParserFactory.Get(command.PlatformEnum, includeProcessDetails).Parse(output);
+        return ParserFactory.Get(command.Platform, includeProcessDetails).Parse(output);
     }
 
     public static INetstatOutput Call(Platform platform, bool includeProcessDetails = true)

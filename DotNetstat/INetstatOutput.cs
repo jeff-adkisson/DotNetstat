@@ -1,4 +1,6 @@
-﻿namespace DotNetstat;
+﻿using DotNetstat.NetstatParsing;
+
+namespace DotNetstat;
 
 public interface INetstatOutput
 {

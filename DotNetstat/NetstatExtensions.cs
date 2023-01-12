@@ -1,3 +1,5 @@
+using DotNetstat.ProcessTree;
+
 namespace DotNetstat;
 
 public static class NetstatExtensions

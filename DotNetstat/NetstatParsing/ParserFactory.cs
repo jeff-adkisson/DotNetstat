@@ -1,4 +1,4 @@
-﻿namespace DotNetstat;
+﻿namespace DotNetstat.NetstatParsing;
 
 internal static class ParserFactory
 {

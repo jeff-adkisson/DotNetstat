@@ -4,6 +4,6 @@ public sealed class RunOnWindowsFactAttribute : FactAttribute
 {
     public RunOnWindowsFactAttribute()
     {
-        if (PlatformAutoSelector.Select() != Platform.Windows) Skip = "Ignore on non-Windows platforms";
+        if (PlatformDetector.Detect() != Platform.Windows) Skip = "Ignore on non-Windows platforms";
     }
 }

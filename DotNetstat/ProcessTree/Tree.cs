@@ -1,16 +1,16 @@
 ﻿using System.Diagnostics;
 
-namespace DotNetstat;
+namespace DotNetstat.ProcessTree;
 
 /// <summary>
 ///     https://www.derpturkey.com/c-process-tree/
 /// </summary>
-public sealed class ProcessTree
+public sealed class Tree
 {
-    private ProcessTree(Process process, Dictionary<int, Process> processes, int depth = 0)
+    internal Tree(Process process, Dictionary<int, Process> processes, int depth = 0)
     {
         Process = process;
-        ChildProcesses = new List<ProcessTree>();
+        ChildProcesses = new List<Tree>();
 
         var childProcesses = Process.GetChildProcesses(processes);
         depth++;
@@ -18,22 +18,16 @@ public sealed class ProcessTree
         if (depth > 5)
             return;
         foreach (var childProcess in childProcesses)
-            ChildProcesses.Add(new ProcessTree(childProcess, processes, depth));
+            ChildProcesses.Add(new Tree(childProcess, processes, depth));
     }
 
     public Process Process { get; }
 
-    public List<ProcessTree> ChildProcesses { get; }
+    public List<Tree> ChildProcesses { get; }
 
     public int Id => Process.Id;
 
     public string ProcessName => Process.ProcessName;
 
     public long Memory => Process.PrivateMemorySize64;
-
-    public static ProcessTree Factory(Process parentProcess)
-    {
-        var processes = Processes.Running();
-        return new ProcessTree(parentProcess, processes);
-    }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace DotNetstat;
+namespace DotNetstat.NetstatParsing;
 
 internal sealed class Parser
 {
@@ -41,13 +41,14 @@ internal sealed class Parser
         ICommand command,
         IReadOnlyDictionary<int, Process>? dictionary)
     {
-        var match = command.RegexCompiled.Match(line);
+        var cmd = (Command)command;
+        var match = cmd.Parsing.NetstatParser.Match(line);
         if (!match.Success) return null;
         if (!int.TryParse(match.Groups["pid"].Value, out var processId)) processId = 0;
 
-        if (processId == 0 && command.RegexProcessId != "*")
+        if (processId == 0 && command.Parsing.IsProcessIdParsingEnabled)
         {
-            var processIdMatch = command.RegexProcessIdCompiled.Match(match.Groups["pid"].Value);
+            var processIdMatch = cmd.Parsing.ProcessIdParser.Match(match.Groups["pid"].Value);
             if (!int.TryParse(processIdMatch.Groups["pid"].Value, out processId)) processId = 0;
         }
 

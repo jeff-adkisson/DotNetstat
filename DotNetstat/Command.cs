@@ -1,33 +1,39 @@
-﻿using System.Text.RegularExpressions;
+﻿using DotNetstat.Models;
 
 namespace DotNetstat;
 
-public class Command : ICommand
+public sealed class Command : ICommand
 {
-    private Regex? _regex;
-    private Regex? _regexProcessId;
+    public Command(Platform platform, string name, string arguments = "", int priority = 1, string? id = null,
+        Parsing? parsing = null)
+    {
+        arguments ??= "";
+        id ??= Guid.NewGuid().ToString();
+        parsing ??= new Parsing(new ParsingModel());
 
-    public string RegexProcessId { get; init; } = "*";
+        Platform = platform;
+        Id = id;
+        Name = name;
+        Arguments = arguments;
+        Priority = priority;
+        Parsing = parsing;
+    }
 
-    public Regex RegexProcessIdCompiled => _regexProcessId ??= new Regex(RegexProcessId, RegexOptions.Compiled);
+    public Command(CommandModel model)
+    {
+        Platform = model.Platform;
+        Id = model.Id;
+        Name = model.Name;
+        Arguments = model.Arguments;
+        Priority = model.Priority;
+        Parsing = new Parsing(model.Parsing);
+    }
 
-    public int PlatformId { get; init; }
-
-    public string Platform => PlatformEnum.ToString().ToLower();
-
-    public Platform PlatformEnum => (Platform)PlatformId;
-
-    public string Id { get; init; } = "";
-
-    public string Name { get; init; } = "";
-
-    public string Arguments { get; init; } = "";
-
+    public Platform Platform { get; init; }
+    public string Id { get; init; }
+    public string Name { get; init; }
+    public string Arguments { get; init; }
     public int Priority { get; init; }
-
     public bool IsPlatformDefault => Priority == 1;
-
-    public string Regex { get; init; } = "*";
-
-    public Regex RegexCompiled => _regex ??= new Regex(Regex, RegexOptions.Compiled);
+    public Parsing Parsing { get; init; }
 }
