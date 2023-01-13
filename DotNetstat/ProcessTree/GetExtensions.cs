@@ -68,7 +68,7 @@ public static partial class GetExtensions
         if (!OperatingSystem.IsLinux()) return results;
 
         var cmd = PlatformDetector.GetCommand();
-        var psOutput = Shell.Execute.Command(cmd.Shell, cmd.Parsing.GetProcessesCommand);
+        var psOutput = Execute.Command(cmd.Shell, cmd.Parsing.GetProcessesCommand);
         var matches = cmd.Parsing.GetProcessesParser.Matches(psOutput);
 
         foreach (Match match in matches)

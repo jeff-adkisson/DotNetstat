@@ -15,7 +15,7 @@ public sealed class Command : ICommand
     }
 
     public Platform Platform { get; init; }
-    
+
     public string Shell { get; init; }
     public string Name { get; init; }
     public string Arguments { get; init; }
@@ -39,7 +39,7 @@ public sealed class Command : ICommand
             var regexProcesses = string.IsNullOrWhiteSpace(model.GetProcessesParserRegex)
                 ? ".*"
                 : model.GetProcessesParserRegex;
-            GetProcessesParser = new Regex(regexProcesses, RegexOptions.Compiled);
+            GetProcessesParser = new Regex(regexProcesses, RegexOptions.Compiled | RegexOptions.Multiline);
         }
 
         public Regex NetstatParser { get; }

@@ -14,7 +14,10 @@ internal static class PlatformDetector
         return Platform.Windows;
     }
 
-    internal static ICommand GetCommand() => Detect().GetCommand();
+    internal static ICommand GetCommand()
+    {
+        return Detect().GetCommand();
+    }
 
     private static bool IsWindows()
     {
