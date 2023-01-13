@@ -42,13 +42,13 @@ internal sealed class Parser
         IReadOnlyDictionary<int, Process>? dictionary)
     {
         var cmd = (Command)command;
-        var match = cmd.Parsing.NetstatParser.Match(line);
+        var match = cmd.Regex.NetstatParser.Match(line);
         if (!match.Success) return null;
         if (!int.TryParse(match.Groups["pid"].Value, out var processId)) processId = 0;
 
-        if (processId == 0 && command.Parsing.IsProcessIdParsingEnabled)
+        if (processId == 0 && command.Regex.IsProcessIdParsingEnabled)
         {
-            var processIdMatch = cmd.Parsing.ProcessIdParser.Match(match.Groups["pid"].Value);
+            var processIdMatch = cmd.Regex.ProcessIdParser.Match(match.Groups["pid"].Value);
             if (!int.TryParse(processIdMatch.Groups["pid"].Value, out processId)) processId = 0;
         }
 

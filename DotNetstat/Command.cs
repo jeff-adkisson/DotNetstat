@@ -10,7 +10,7 @@ public sealed class Command : ICommand
         Shell = model.Shell;
         Name = model.Name;
         Arguments = model.Arguments;
-        Parsing = new ParsingRegex(model.Parsing);
+        Regex = new CommandRegex(model.Parsing);
     }
 
     public Platform Platform { get; init; }
@@ -18,5 +18,5 @@ public sealed class Command : ICommand
     public string Shell { get; init; }
     public string Name { get; init; }
     public string Arguments { get; init; }
-    public ParsingRegex Parsing { get; init; }
+    public CommandRegex Regex { get; init; }
 }

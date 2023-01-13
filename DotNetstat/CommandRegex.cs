@@ -3,9 +3,9 @@ using DotNetstat.Models;
 
 namespace DotNetstat;
 
-public sealed class ParsingRegex
+public sealed class CommandRegex
 {
-    public ParsingRegex(ParsingModel model)
+    public CommandRegex(ParsingModel model)
     {
         GetProcessesCommand = model.GetProcessesCommand;
 

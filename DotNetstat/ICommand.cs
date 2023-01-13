@@ -6,5 +6,5 @@ public interface ICommand
     string Shell { get; }
     string Name { get; }
     string Arguments { get; }
-    ParsingRegex Parsing { get; }
+    CommandRegex Regex { get; }
 }

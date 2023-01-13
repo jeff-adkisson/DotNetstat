@@ -12,6 +12,6 @@ public class CommandTests : TestBase
     public void OutputCommands()
     {
         foreach (var command in DotNetstat.Commands.Items)
-            Output.WriteLine($"{command.Platform} | {command.Parsing.NetstatParser}");
+            Output.WriteLine($"{command.Platform} | {command.Regex.NetstatParser}");
     }
 }
