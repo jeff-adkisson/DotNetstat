@@ -13,6 +13,9 @@ public class PlatformTests : TestBase
     [RunOnWindowsFact]
     public void TestPlatform()
     {
+        var isWinCmd = Platform.Automatic.GetCommand();
+        Assert.True(isWinCmd.Platform == Platform.Windows);
+        
         var results = Netstat.Call(Platform.Windows);
         Assert.True(results.Success);
         Assert.True(results.Lines.Any(), "Expected at least one result");

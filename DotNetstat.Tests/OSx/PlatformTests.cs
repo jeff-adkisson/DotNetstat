@@ -1,16 +1,16 @@
 using DotNetstat.Tests.Facts;
 
-namespace DotNetstat.Tests.Linux;
+namespace DotNetstat.Tests.OSx;
 
 public class PlatformTests
 {
-    [RunOnLinuxFact]
+    [RunOnOsxFact]
     public void TestPlatform()
     {
-        var isLinuxCmd = Platform.Automatic.GetCommand();
-        Assert.True(isLinuxCmd.Platform == Platform.Linux);
+        var isOsxCmd = Platform.Automatic.GetCommand();
+        Assert.True(isOsxCmd.Platform == Platform.Osx);
         
-        var results = Netstat.Call(Platform.Linux);
+        var results = Netstat.Call(Platform.Osx);
         Assert.True(results.Success);
         Assert.True(results.Lines.Any(), "Expected at least one result");
         Assert.Contains(results.Lines, p => p.Process != null);
