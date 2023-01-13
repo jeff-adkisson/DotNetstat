@@ -4,15 +4,22 @@ namespace DotNetstat;
 
 public static class NetstatExtensions
 {
-    public static IEnumerable<NetstatLine> ByProcessId(
-        this IEnumerable<NetstatLine> netstatLines,
+    /// <summary>
+    ///     Returns all netstat output related to a specific process ID.
+    ///     Returns empty collection if no matching process is found.
+    /// </summary>
+    /// <param name="netstatOutput"></param>
+    /// <param name="processId"></param>
+    /// <returns></returns>
+    public static IEnumerable<Line> ByProcessId(
+        this IOutput netstatOutput,
         int processId)
     {
-        var result = new List<NetstatLine>();
+        var result = new List<Line>();
 
-        var enumerable = netstatLines as NetstatLine[] ?? netstatLines.ToArray();
+        var enumerable = netstatOutput.Lines.ToArray();
 
-        var currentProcess = Processes.Running().ByProcessId(processId);
+        var currentProcess = Processes.GetProcessById(processId);
         if (currentProcess == null) return result;
 
         var processTree = currentProcess.GetTree();
@@ -21,15 +28,29 @@ public static class NetstatExtensions
         return result.DistinctBy(r => r.LocalPort);
     }
 
-    public static IEnumerable<NetstatLine> ByLocalPort(
-        this IEnumerable<NetstatLine> netstatLines,
+    /// <summary>
+    ///     Returns all netstat output related to a specific local port.
+    ///     Returns empty collection if no matching local port is found.
+    /// </summary>
+    /// <param name="netstatOutput"></param>
+    /// <param name="localPort"></param>
+    /// <returns></returns>
+    public static IEnumerable<Line> ByLocalPort(
+        this IOutput netstatOutput,
         int localPort)
     {
-        return netstatLines.Where(n => n.LocalPort == localPort).ToList();
+        return netstatOutput.Lines.Where(n => n.LocalPort == localPort).ToList();
     }
 
-    public static IEnumerable<NetstatLine> ByForeignPort(
-        this IEnumerable<NetstatLine> netstatLines,
+    /// <summary>
+    ///     Returns all netstat output related to a specific foreign port.
+    ///     Returns empty collection if no matching foreign port is found.
+    /// </summary>
+    /// <param name="netstatLines"></param>
+    /// <param name="foreignPort"></param>
+    /// <returns></returns>
+    public static IEnumerable<Line> ByForeignPort(
+        this IEnumerable<Line> netstatLines,
         int foreignPort)
     {
         return netstatLines.Where(n => n.ForeignPort == foreignPort).ToList();

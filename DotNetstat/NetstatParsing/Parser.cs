@@ -14,11 +14,11 @@ internal sealed class Parser
 
     private bool IncludeProcessDetails { get; }
 
-    internal INetstatOutput Parse(string netstatCmdOutput)
+    internal IOutput Parse(string netstatCmdOutput)
     {
-        var parsedLines = new List<NetstatLine>();
-        var unparsedLines = new List<Line>();
-        var processes = IncludeProcessDetails ? Processes.Running() : null;
+        var parsedLines = new List<Line>();
+        var unparsedLines = new List<OriginalLine>();
+        var processes = IncludeProcessDetails ? Processes.GetRunning() : null;
 
         var lines = netstatCmdOutput.Split('\n');
 
@@ -29,13 +29,13 @@ internal sealed class Parser
             if (record != null)
                 parsedLines.Add(record);
             else
-                unparsedLines.Add(new Line(index + 1, line));
+                unparsedLines.Add(new OriginalLine(index + 1, line));
         }
 
-        return new NetstatOutput(Command, parsedLines, unparsedLines);
+        return new Output(Command, parsedLines, unparsedLines);
     }
 
-    private static NetstatLine? ParseLine(
+    private static Line? ParseLine(
         int lineNumber,
         string line,
         ICommand command,
@@ -56,7 +56,7 @@ internal sealed class Parser
             ? value
             : null;
 
-        return new NetstatLine(lineNumber, line, process)
+        return new Line(lineNumber, line, process)
         {
             Protocol = match.Groups["proto"].Value,
             LocalAddress = match.Groups["local"].Value,

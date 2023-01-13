@@ -1,0 +1,40 @@
+﻿{
+  "Commands": [
+    {
+      "Platform": "windows",
+      "Shell": "cmd",
+      "Name": "netstat",
+      "Arguments": "-n -a -o",
+      "Parsing": {
+        "NetstatParserRegex": "^\\s*(?<proto>\\S+)\\s+(?<local>\\S+)\\s+(?<foreign>\\S+)\\s+(?<state>.+)\\s+(?<pid>\\d+).*$",
+        "ProcessIdParserRegex": "",
+        "GetProcessesCommand": "not-used",
+        "GetProcessesParserRegex": "not-used"
+      }
+    },
+    {
+      "Platform": "linux",
+      "Shell": "/bin/bash",
+      "Name": "ss",
+      "Arguments": "-ltnup",
+      "Parsing": {
+        "NetstatParserRegex": "^\\s*(?<proto>\\S+)\\s+(?<state>\\S+)\\s+(?:\\d)\\s+(?:\\d+)\\s+(?<local>\\S+)\\s+(?<foreign>\\S+)(?<pid>.+)",
+        "ProcessIdParserRegex": ",pid=(?<pid>\\d+),",
+        "GetProcessesCommand": "ps -ef",
+        "GetProcessesParserRegex": "^\\s*(?:\\S+)\\s+(?<pid>\\d+)\\s+(?<ppid>\\d+).*$"
+      }
+    },
+    {
+      "Platform": "osx",
+      "Shell": "zsh",
+      "Name": "netstat",
+      "Arguments": "-nlp",
+      "Parsing": {
+        "NetstatParserRegex": "^\\s*(?<proto>\\S+)\\s+(?<state>\\S+)\\s+(?:\\d)\\s+(?:\\d+)\\s+(?<local>\\S+)\\s+(?<foreign>\\S+)(?<pid>.+)",
+        "ProcessIdParserRegex": ",pid=(?<pid>\\d+),",
+        "GetProcessesCommand": "ps -ef",
+        "GetProcessesParserRegex": "^\\s*(?:\\S+)\\s+(?<pid>\\d+)\\s+(?<ppid>\\d+).*$"
+      }
+    }
+  ]
+}

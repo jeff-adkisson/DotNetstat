@@ -7,12 +7,12 @@ namespace DotNetstat.ProcessTree;
 /// </summary>
 public sealed class Tree
 {
-    internal Tree(Process process, Dictionary<int, Process> processes, int depth = 0)
+    internal Tree(Process process, Processes processes, int depth = 0)
     {
         Process = process;
         ChildProcesses = new List<Tree>();
 
-        var childProcesses = Process.GetChildren(processes);
+        var childProcesses = Process.GetChildProcesses(processes);
         depth++;
 
         if (depth > 5)

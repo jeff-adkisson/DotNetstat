@@ -6,30 +6,25 @@ using DotNetstat.Shell;
 
 namespace DotNetstat.ProcessTree;
 
-public static class GetExtensions
+public static partial class GetExtensions
 {
-    private static readonly ICommand LinuxShellCommand = new Command(Platform.Linux, "ps -ef");
-
     public static Tree GetTree(this Process parentProcess)
     {
-        var processes = Processes.Running();
-        return new Tree(parentProcess, processes);
+        return new Tree(parentProcess, Processes.GetRunning());
     }
 
-    public static List<Process> GetChildren(this Process process)
+    public static List<Process> GetChildProcesses(this Process process)
     {
-        return process.GetChildren(Processes.Running());
+        return process.GetChildProcesses(Processes.GetRunning());
     }
 
-    internal static List<Process> GetChildren(this Process process, Dictionary<int, Process> dictionary)
+    internal static List<Process> GetChildProcesses(this Process process, Processes processes)
     {
 #pragma warning disable CA1416
-        if (OperatingSystem.IsWindows()) return process.GetChildProcessesOnWindows(dictionary);
-        if (OperatingSystem.IsLinux()) return process.GetChildProcessesOnLinux(dictionary);
-        if (OperatingSystem.IsMacOSx()) throw new PlatformNotSupportedException("GetChildProcesses does not support MacOS yet");
+        return OperatingSystem.IsWindows()
+            ? process.GetChildProcessesOnWindows(processes)
+            : process.GetChildProcessesFromShell(processes);
 #pragma warning restore CA1416
-
-        return new List<Process>();
     }
 
     /// <summary>
@@ -39,7 +34,7 @@ public static class GetExtensions
     /// <param name="dictionary"></param>
     /// <returns></returns>
     [SupportedOSPlatform("windows")]
-    private static List<Process> GetChildProcessesOnWindows(this Process process, Dictionary<int, Process> dictionary)
+    private static List<Process> GetChildProcessesOnWindows(this Process process, Processes processes)
     {
         var results = new List<Process>();
 
@@ -52,7 +47,7 @@ public static class GetExtensions
             var data = obj.Properties["processid"].Value;
             var childId = Convert.ToInt32(data);
 
-            var childProcess = dictionary.ContainsKey(childId) ? dictionary[childId] : null;
+            var childProcess = processes.ContainsKey(childId) ? processes[childId] : null;
             if (childProcess != null) results.Add(childProcess);
         }
 
@@ -63,18 +58,18 @@ public static class GetExtensions
     ///     Get the child processes for a given process
     /// </summary>
     /// <param name="process"></param>
-    /// <param name="dictionary"></param>
+    /// <param name="processes"></param>
     /// <returns></returns>
     [SupportedOSPlatform("linux")]
-    private static List<Process> GetChildProcessesOnLinux(this Process process, Dictionary<int, Process> dictionary)
+    private static List<Process> GetChildProcessesFromShell(this Process process, Processes processes)
     {
         var results = new List<Process>();
 
         if (!OperatingSystem.IsLinux()) return results;
 
-        var psOutput = Platform.Linux.ExecuteShellCommand(LinuxShellCommand);
-        var regex = new Regex(@"^\s*(?:\S+)\s+(?<pid>\d+)\s+(?<ppid>\d+).*$", RegexOptions.Multiline);
-        var matches = regex.Matches(psOutput);
+        var cmd = PlatformDetector.GetCommand();
+        var psOutput = Shell.Execute.Command(cmd.Shell, cmd.Parsing.GetProcessesCommand);
+        var matches = cmd.Parsing.GetProcessesParser.Matches(psOutput);
 
         foreach (Match match in matches)
         {
@@ -82,10 +77,13 @@ public static class GetExtensions
             var ppid = int.Parse(match.Groups["ppid"].Value);
             if (ppid != process.Id) continue;
 
-            var childProcess = dictionary.ContainsKey(pid) ? dictionary[pid] : null;
+            var childProcess = processes.ContainsKey(pid) ? processes[pid] : null;
             if (childProcess != null) results.Add(childProcess);
         }
 
         return results;
     }
+
+    [GeneratedRegex("^\\s*(?:\\S+)\\s+(?<pid>\\d+)\\s+(?<ppid>\\d+).*$", RegexOptions.Multiline)]
+    private static partial Regex LinuxPsCommandParserRegex();
 }

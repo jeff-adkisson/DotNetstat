@@ -3,9 +3,9 @@ using DotNetstat.NetstatParsing;
 
 namespace DotNetstat;
 
-public class NetstatOutput : INetstatOutput
+public class Output : IOutput
 {
-    public NetstatOutput(ICommand command, IEnumerable<NetstatLine> lines, IEnumerable<Line> unparsedLines)
+    public Output(ICommand command, IEnumerable<Line> lines, IEnumerable<OriginalLine> unparsedLines)
     {
         Lines = lines.ToList().AsReadOnly();
         UnparsedLines = unparsedLines.ToList().AsReadOnly();
@@ -15,9 +15,9 @@ public class NetstatOutput : INetstatOutput
 
     public Platform Platform { get; init; }
 
-    public IReadOnlyCollection<NetstatLine> Lines { get; init; }
+    public IReadOnlyCollection<Line> Lines { get; init; }
 
-    public IReadOnlyCollection<Line> UnparsedLines { get; init; }
+    public IReadOnlyCollection<OriginalLine> UnparsedLines { get; init; }
 
     public ICommand Command { get; init; }
 
@@ -39,7 +39,7 @@ public class NetstatOutput : INetstatOutput
             for (var i = 0; i < allLines.Count(); i++)
             {
                 var number = string.Format($"{{0,{spacing}}}", i + 1);
-                sb.AppendLine($"{number} | {allLines[i].OriginalLine}");
+                sb.AppendLine($"{number} | {allLines[i].Data}");
             }
 
             return sb.ToString();

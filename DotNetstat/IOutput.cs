@@ -2,13 +2,13 @@
 
 namespace DotNetstat;
 
-public interface INetstatOutput
+public interface IOutput
 {
     string OriginalOutput { get; }
 
-    IReadOnlyCollection<NetstatLine> Lines { get; init; }
+    IReadOnlyCollection<Line> Lines { get; init; }
 
-    IReadOnlyCollection<Line> UnparsedLines { get; init; }
+    IReadOnlyCollection<OriginalLine> UnparsedLines { get; init; }
 
     ICommand Command { get; init; }
 

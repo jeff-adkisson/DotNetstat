@@ -3,23 +3,24 @@ using DotNetstat.NetstatParsing;
 
 namespace DotNetstat;
 
-public sealed record NetstatLine : Line
+public sealed record Line : OriginalLine
 {
     private int? _foreignPort;
     private int? _localPort;
 
-    public NetstatLine(int lineNbr, string originalLine, Process? process) : base(lineNbr, originalLine)
+    public Line(int lineNbr, string originalLine, Process? process) : base(lineNbr, originalLine)
     {
         Process = process;
-        if (process != null)
-            try
-            {
-                ModuleName = process.MainModule?.ModuleName ?? "";
-            }
-            catch (Exception)
-            {
-                ModuleName = "Not Available";
-            }
+        if (process == null) return;
+
+        try
+        {
+            ModuleName = process.MainModule?.ModuleName ?? "";
+        }
+        catch (Exception)
+        {
+            ModuleName = "Not Available";
+        }
     }
 
     public string Protocol { get; init; } = "Unknown";

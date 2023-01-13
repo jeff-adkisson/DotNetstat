@@ -3,10 +3,8 @@
 public interface ICommand
 {
     Platform Platform { get; }
-    string Id { get; }
+    string Shell { get; }
     string Name { get; }
     string Arguments { get; }
-    int Priority { get; }
-    bool IsPlatformDefault { get; }
-    Parsing Parsing { get; }
+    Command.ParsingRegex Parsing { get; }
 }

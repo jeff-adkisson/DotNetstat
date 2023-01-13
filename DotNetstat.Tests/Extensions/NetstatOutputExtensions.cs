@@ -4,18 +4,18 @@ namespace DotNetstat.Tests.Extensions;
 
 public static class NetstatOutputExtensions
 {
-    public static string WriteLinesToTable(this INetstatOutput netstatOutput)
+    public static string WriteLinesToTable(this IOutput output)
     {
         return ConsoleTable
-            .From(netstatOutput.Lines.Select(line => new
+            .From(output.Lines.Select(line => new
                 { line.Number, line.Protocol, line.LocalAddress, line.ForeignAddress, line.State, line.ProcessId }))
             .Configure(o => o.NumberAlignment = Alignment.Right)
             .ToString();
     }
 
-    public static string WriteLinesAndOriginalOutput(this INetstatOutput netstatOutput)
+    public static string WriteLinesAndOriginalOutput(this IOutput output)
     {
-        var table = netstatOutput.WriteLinesToTable();
-        return $"{table}{Environment.NewLine}{Environment.NewLine}{netstatOutput.OriginalOutput}";
+        var table = output.WriteLinesToTable();
+        return $"{table}{Environment.NewLine}{Environment.NewLine}{output.OriginalOutput}";
     }
 }

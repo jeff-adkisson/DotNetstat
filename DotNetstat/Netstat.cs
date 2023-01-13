@@ -5,21 +5,37 @@ namespace DotNetstat;
 
 public static class Netstat
 {
-    public static INetstatOutput Call(bool includeProcessDetails = true)
+    /// <summary>
+    ///     Returns netstat output. Choice of platform is automatically selected.
+    /// </summary>
+    /// <param name="includeProcessDetails"></param>
+    /// <returns></returns>
+    public static IOutput Call(bool includeProcessDetails = true)
     {
         return Call(Platform.Automatic, includeProcessDetails);
     }
 
-    public static INetstatOutput Call(ICommand command, bool includeProcessDetails = true)
+    /// <summary>
+    ///     Returns netstat output using the supplied <see cref="ICommand" />.
+    /// </summary>
+    /// <param name="command"></param>
+    /// <param name="includeProcessDetails"></param>
+    /// <returns></returns>
+    public static IOutput Call(ICommand command, bool includeProcessDetails = true)
     {
         var output = ExecuteCommand(command);
         return ParserFactory.Get(command.Platform, includeProcessDetails).Parse(output);
     }
 
-    public static INetstatOutput Call(Platform platform, bool includeProcessDetails = true)
+    /// <summary>
+    ///     Returns netstat output using the supplied <see cref="Platform" />.
+    /// </summary>
+    /// <param name="platform"></param>
+    /// <param name="includeProcessDetails"></param>
+    /// <returns></returns>
+    public static IOutput Call(Platform platform, bool includeProcessDetails = true)
     {
-        var cmd = platform.DefaultCommand();
-        var output = ExecuteCommand(cmd);
+        var output = ExecuteCommand(platform.GetCommand());
         var parser = ParserFactory.Get(platform, includeProcessDetails);
         return parser.Parse(output);
     }
