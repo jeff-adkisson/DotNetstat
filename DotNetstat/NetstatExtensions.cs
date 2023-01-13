@@ -25,7 +25,7 @@ public static class NetstatExtensions
         var processTree = currentProcess.GetTree();
         var allProcesses = processTree.Flatten();
         foreach (var process in allProcesses) result.AddRange(enumerable.Where(n => n.ProcessId == process.Id));
-        return result.DistinctBy(r => r.LocalPort);
+        return result.DistinctBy(r => r.LocalAddress.Port);
     }
 
     /// <summary>
@@ -39,7 +39,7 @@ public static class NetstatExtensions
         this IOutput netstatOutput,
         int localPort)
     {
-        return netstatOutput.Lines.Where(n => n.LocalPort == localPort).ToList();
+        return netstatOutput.Lines.Where(n => n.LocalAddress.Port == localPort).ToList();
     }
 
     /// <summary>
@@ -53,6 +53,6 @@ public static class NetstatExtensions
         this IEnumerable<Line> netstatLines,
         int foreignPort)
     {
-        return netstatLines.Where(n => n.ForeignPort == foreignPort).ToList();
+        return netstatLines.Where(n => n.ForeignAddress.Port == foreignPort).ToList();
     }
 }

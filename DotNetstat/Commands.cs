@@ -5,10 +5,10 @@ namespace DotNetstat;
 
 public static class Commands
 {
-    private static ReadOnlyCollection<ICommand>? _readOnlyCommands;
+    private static ReadOnlyCollection<ICommand>? ReadOnlyCommands { get; set; }
 
     public static ReadOnlyCollection<ICommand> Items =>
-        _readOnlyCommands ??= Loader.GetConfiguration();
+        ReadOnlyCommands ??= Loader.GetConfiguration();
 
     public static ICommand GetCommand(this Platform platform)
     {

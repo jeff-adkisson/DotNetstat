@@ -5,8 +5,11 @@ namespace DotNetstat;
 
 public sealed record Line : OriginalLine
 {
-    private int? _foreignPort;
-    private int? _localPort;
+    // ReSharper disable once MemberCanBePrivate.Global
+    /// <summary>
+    ///     Returned if process ID cannot be parsed
+    /// </summary>
+    public static int ProcessIdNotSpecified => -1;
 
     public Line(int lineNbr, string originalLine, Process? process) : base(lineNbr, originalLine)
     {
@@ -25,43 +28,21 @@ public sealed record Line : OriginalLine
 
     public string Protocol { get; init; } = "Unknown";
 
-    public string LocalAddress { get; init; } = "Unknown";
+    public Address LocalAddress { get; init; } = new("default");
 
-    public string ForeignAddress { get; init; } = "Unknown";
+    public Address ForeignAddress { get; init; } = new("default");
 
     public string State { get; init; } = "Unknown";
 
-    public int ProcessId { get; init; } = PortNotSpecified;
+    public int ProcessId { get; init; } = ProcessIdNotSpecified;
 
     public string ModuleName { get; init; } = "";
 
     public Process? Process { get; init; }
 
-    // ReSharper disable once MemberCanBePrivate.Global
-    /// <summary>
-    ///     Returned if address does not have a port or the port cannot be parsed
-    /// </summary>
-    public static int PortNotSpecified => -1;
-
-    public int LocalPort =>
-        _localPort ?? (_localPort = ParsePortFromAddress(LocalAddress)).Value;
-
-    public int ForeignPort =>
-        _foreignPort ?? (_foreignPort = ParsePortFromAddress(ForeignAddress)).Value;
-
-    private static int ParsePortFromAddress(string address)
-    {
-        if (string.IsNullOrWhiteSpace(address)) return PortNotSpecified;
-
-        var parts = address.Split(':');
-        if (parts.Length != 2) return PortNotSpecified;
-        var parsed = int.TryParse(parts[1], out var port);
-        return parsed ? port : PortNotSpecified;
-    }
-
     public override string ToString()
     {
         return
-            $"Proto {Protocol} | Local {LocalAddress}, {LocalPort} | Foreign {ForeignAddress} {ForeignPort} | State {State} | Process {ProcessId}";
+            $"Proto {Protocol} | Local {LocalAddress} | Foreign {ForeignAddress} | State {State} | Process {ProcessId}";
     }
 }

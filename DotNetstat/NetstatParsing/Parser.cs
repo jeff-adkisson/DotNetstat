@@ -59,8 +59,8 @@ internal sealed class Parser
         return new Line(lineNumber, line, process)
         {
             Protocol = match.Groups["proto"].Value,
-            LocalAddress = match.Groups["local"].Value,
-            ForeignAddress = match.Groups["foreign"].Value,
+            LocalAddress = new Address(match.Groups["local"].Value),
+            ForeignAddress = new Address(match.Groups["foreign"].Value),
             State = match.Groups["state"].Value,
             ProcessId = processId
         };
