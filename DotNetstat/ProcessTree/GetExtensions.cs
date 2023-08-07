@@ -65,9 +65,7 @@ public static partial class GetExtensions
     private static List<Process> GetChildProcessesFromShell(this Process process, Processes processes)
     {
         var results = new List<Process>();
-
-        if (!OperatingSystem.IsLinux()) return results;
-
+        
         var cmd = PlatformDetector.GetCommand();
         var psOutput = Execute.Command(cmd.Shell, cmd.Regex.GetProcessesCommand);
         var matches = cmd.Regex.GetProcessesParser.Matches(psOutput);
