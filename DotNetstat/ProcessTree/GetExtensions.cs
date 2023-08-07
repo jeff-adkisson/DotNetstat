@@ -31,7 +31,7 @@ public static partial class GetExtensions
     ///     Get the child processes for a given process
     /// </summary>
     /// <param name="process"></param>
-    /// <param name="dictionary"></param>
+    /// <param name="processes"></param>
     /// <returns></returns>
     [SupportedOSPlatform("windows")]
     private static List<Process> GetChildProcessesOnWindows(this Process process, Processes processes)
@@ -61,6 +61,7 @@ public static partial class GetExtensions
     /// <param name="processes"></param>
     /// <returns></returns>
     [SupportedOSPlatform("linux")]
+    [SupportedOSPlatform("osx")]
     private static List<Process> GetChildProcessesFromShell(this Process process, Processes processes)
     {
         var results = new List<Process>();

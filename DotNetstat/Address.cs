@@ -1,22 +1,29 @@
-﻿namespace DotNetstat;
+﻿using System.Text.RegularExpressions;
+
+namespace DotNetstat;
 
 public record Address
 {
-    public Address(string address)
+    public Address(string address, Regex? extractPortRegex = null)
     {
         address = (address ?? "").Trim();
-        if (string.IsNullOrWhiteSpace(address)) return;
 
-        var parts = address.Split(':');
-        if (parts.Length != 2)
+        if (string.IsNullOrWhiteSpace(address) || extractPortRegex == null)
         {
             Name = address;
             return;
         }
 
-        var parsed = int.TryParse(parts[1], out var port);
-        Port = parsed ? port : PortNotSpecified;
-        Name = parts[0];
+        var port = PortNotSpecified;
+        var matches = extractPortRegex.Matches(address);
+        if (matches.Count == 1) {
+            var groups = matches[0].Groups;
+            if (groups["address"].Success) address = groups["address"].Value;
+            if (groups["port"].Success) int.TryParse(groups["port"].Value, out port);
+        }
+        
+        Port = port;
+        Name = address;
     }
 
     // ReSharper disable once MemberCanBePrivate.Global
@@ -25,7 +32,7 @@ public record Address
     /// </summary>
     public static int PortNotSpecified => -1;
 
-    public int Port { get; init; } = PortNotSpecified;
+    public int Port { get; } = PortNotSpecified;
 
     public string Name { get; init; } = "";
 }

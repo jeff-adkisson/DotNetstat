@@ -9,4 +9,6 @@ public class ParsingModel
     public string GetProcessesCommand { get; init; } = "";
 
     public string GetProcessesParserRegex { get; init; } = ".*";
+
+    public string ParseAddressAndPortRegex { get; init; } = "";
 }

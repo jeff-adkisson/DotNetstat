@@ -11,16 +11,16 @@ public class ParserTests : TestBase
     {
     }
 
-    
-    // [Fact]
-    // public void TestParser()
-    // {
-    //     var netstatOutput = TestResourceGetter.Get("osx.netstat.nlp.txt");
-    //     var parser = ParserFactory.Get(Platform.Osx, false);
-    //     var results = parser.Parse(netstatOutput);
-    //     var lines = results.Lines.ToArray();
-    //     Assert.Equal(22, lines.Count());
-    //     Assert.True(lines[2].ProcessId == 19201);
-    //     Output.WriteLine(results.WriteLinesAndOriginalOutput());
-    // }
+    [Fact]
+    public void TestParser()
+    {
+        var netstatOutput = TestResourceGetter.Get("osx.lsof.i4a.txt");
+        var parser = ParserFactory.Get(Platform.Osx, false);
+        var results = parser.Parse(netstatOutput);
+        var lines = results.Lines.ToArray();
+        Output.WriteLine(results.WriteLinesAndOriginalOutput());
+        Assert.Equal(72, lines.Count());
+        Assert.Equal(1178, lines[0].ProcessId);
+        Assert.Equal(875, lines[1].ProcessId);
+    }
 }

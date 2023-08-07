@@ -5,12 +5,6 @@ namespace DotNetstat;
 
 public sealed record Line : OriginalLine
 {
-    // ReSharper disable once MemberCanBePrivate.Global
-    /// <summary>
-    ///     Returned if process ID cannot be parsed
-    /// </summary>
-    public static int ProcessIdNotSpecified => -1;
-
     public Line(int lineNbr, string originalLine, Process? process) : base(lineNbr, originalLine)
     {
         Process = process;
@@ -25,6 +19,12 @@ public sealed record Line : OriginalLine
             ModuleName = "Not Available";
         }
     }
+
+    // ReSharper disable once MemberCanBePrivate.Global
+    /// <summary>
+    ///     Returned if process ID cannot be parsed
+    /// </summary>
+    public static int ProcessIdNotSpecified => -1;
 
     public string Protocol { get; init; } = "Unknown";
 

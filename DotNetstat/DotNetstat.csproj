@@ -21,15 +21,15 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Remove="Commands.json" />
+        <None Remove="Commands.json"/>
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Include="Configuration\configuration.json" />
+        <EmbeddedResource Include="Configuration\configuration.json"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="System.Management" Version="7.0.0" />
+        <PackageReference Include="System.Management" Version="7.0.0"/>
     </ItemGroup>
 
 </Project>

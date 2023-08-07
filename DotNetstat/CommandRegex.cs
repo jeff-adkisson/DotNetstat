@@ -22,6 +22,8 @@ public sealed class CommandRegex
             ? ".*"
             : model.GetProcessesParserRegex;
         GetProcessesParser = new Regex(regexProcesses, RegexOptions.Compiled | RegexOptions.Multiline);
+        
+        GetPortFromAddressParser = new Regex(model.ParseAddressAndPortRegex, RegexOptions.Compiled | RegexOptions.Multiline);
     }
 
     public Regex NetstatParser { get; }
@@ -33,4 +35,6 @@ public sealed class CommandRegex
     public string GetProcessesCommand { get; }
 
     public Regex GetProcessesParser { get; }
+    
+    public Regex GetPortFromAddressParser { get; }
 }

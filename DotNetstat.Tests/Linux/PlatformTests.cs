@@ -9,7 +9,7 @@ public class PlatformTests
     {
         var isLinuxCmd = Platform.Automatic.GetCommand();
         Assert.True(isLinuxCmd.Platform == Platform.Linux);
-        
+
         var results = Netstat.Call(Platform.Linux);
         Assert.True(results.Success);
         Assert.True(results.Lines.Any(), "Expected at least one result");
